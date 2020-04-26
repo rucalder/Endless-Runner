@@ -11,3 +11,5 @@ function create(){
     game.physics.enable(p1Rocket, Phaser.Physics.ARCADE);
     game.physics.enable(p2Rocket, Phaser.Physics.ARCADE);
 }
+
+let keyF, keyLEFT, keyRIGHT, keyUP, keyDOWN;

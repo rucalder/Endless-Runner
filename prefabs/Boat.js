@@ -23,6 +23,18 @@ class Boat extends Phaser.GameObjects.Sprite{
         
     }
 
+    checkCollision(object){
+        if(this.x < object.x + object.width &&
+            this.x + this.width > object.x &&
+            this.y < object.y +object.height &&
+            this.height + this.y > object.y){
+                return true;
+            }
+            else{
+                return false;
+            }
+    }
+
     //reset rocket to ground
     reset(){
     }

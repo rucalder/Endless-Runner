@@ -97,13 +97,7 @@ class Play extends Phaser.Scene{
         this.add.text(360, 448, "Time: ", scoreConfig);
         this.time1 = this.add.text(450, 450, this.totalTime, scoreConfig);
 
-        /*this.timer = this.time.addEvent({
-            loop: false,
-            startAt: 0,
-            timeScale: 1,
-            paused: false
-        });*/
-        
+        this.level = 1;
 
     }
 
@@ -113,6 +107,10 @@ class Play extends Phaser.Scene{
             this.skull.update()
             this.bone.update()
             this.soul.update()
+        }
+
+        if(this.p1Boat.checkCollision(this.skull)){
+            this.gameOver = true
         }
 
         
@@ -126,9 +124,11 @@ class Play extends Phaser.Scene{
         }
 
         this.totalTime = this.time.now / 1000
+        if(this.totalTime % 5 == 0){
+            this.level += 1
+            console.log(this.level)
+        }
 
         this.time1.text = this.totalTime;
-        //console.log(Phaser.Time.Clock.now)
-
     }
 }

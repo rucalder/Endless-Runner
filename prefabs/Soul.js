@@ -11,7 +11,7 @@ class Soul extends Phaser.GameObjects.Sprite{
         this.y -= game.settings.obstacleSpeed
         
         if(this.y <= 0 - this.height){
-            this.reset();
+            this.destroy();
         }
     }
 

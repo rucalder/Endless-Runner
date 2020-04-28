@@ -50,7 +50,7 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("soul", {start: 0, end: 2, first: 0}),
             frameRate:8
         });
-        this.soul = new Soul(this, 200, 100, "soul").setScale(.8, .8)
+        this.soul = new Soul(this, 560, 100, "soul").setScale(.8, .8)
         this.soul.play("soul")
 
 

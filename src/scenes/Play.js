@@ -97,7 +97,7 @@ class Play extends Phaser.Scene{
         this.add.text(360, 448, "Time: ", scoreConfig);
         this.time1 = this.add.text(450, 450, this.totalTime, scoreConfig);
 
-        this.level = 1;
+        this.level = 1;  
 
     }
 
@@ -107,6 +107,10 @@ class Play extends Phaser.Scene{
             this.skull.update()
             this.bone.update()
             this.soul.update()
+            this.totalTime = this.time.now / 1000
+        }
+        if(this.gameOver){
+            this.displayText();
         }
 
         if(this.p1Boat.checkCollision(this.skull)){
@@ -116,19 +120,44 @@ class Play extends Phaser.Scene{
         
 
         // check key input for restart
-        if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyF)) {
-            this.scene.restart(this.p1Score);
-        }
-        if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-            this.scene.start("menuScene");
-        }
-
-        this.totalTime = this.time.now / 1000
         if(this.totalTime % 5 == 0){
             this.level += 1
             console.log(this.level)
         }
 
         this.time1.text = this.totalTime;
+    }
+
+    displayText(){
+
+        let menuConfig = {
+            fontFamily: "Courier",
+            fontSize: "26px",
+            backgroundColor: "#F3B141",
+            color: "#123456",
+            align: "right",
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 0
+        }
+
+        let centerX = game.config.width/2
+        let centerY = game.config.height/2
+
+        this.add.text(centerX, centerY - 100, 'GAME OVER', menuConfig).setOrigin(0.5);
+            let restart = this.add.text(centerX - 100, centerY, "Restart", menuConfig).setOrigin(0.5);
+            restart.setInteractive();
+            restart.on("pointerup", () =>{
+                this.time.now = 0
+                this.scene.start("playScene");
+            })
+            let menu = this.add.text(centerX + 100, centerY, "Menu", menuConfig).setOrigin(0.5);
+            menu.setInteractive();
+            menu.on("pointerup", () =>{
+                this.time.now = 0
+                this.scene.start("menuScene");
+            })
     }
 }

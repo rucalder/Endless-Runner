@@ -11,6 +11,7 @@ class Play extends Phaser.Scene{
     }
 
     create(){
+        this.gameOver = false
 
         // Borders
         this.add.rectangle(0, 0, 64, 500, 0xF5F5DC).setOrigin(0, 0);
@@ -20,6 +21,7 @@ class Play extends Phaser.Scene{
 
         this.p1Boat = new Boat(this, 320, 5, "charon").setOrigin(0, 0)
         //const boat = this.add.sprite(200, 100, "CHARON SPRITE", 0)
+
 
         // Define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
@@ -36,6 +38,11 @@ class Play extends Phaser.Scene{
         });
         this.p1Boat.play("move")
 
+        //Phaser.Physics.Arcade.enable(this.p1Boat);
+        this.p1Boat.enableBody = true;
+        this.p1Boat.onCollide = true;
+        
+
         // Soul Animation
         this.anims.create({
             key: "soul",
@@ -43,8 +50,8 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("soul", {start: 0, end: 2, first: 0}),
             frameRate:8
         });
-        const soul = this.add.sprite(300, 200, "soul", 0)
-        soul.play("soul")
+        this.soul = new Soul(this, 200, 100, "soul").setScale(.8, .8)
+        this.soul.play("soul")
 
 
         //Bone Animation
@@ -54,8 +61,8 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("bone", {start: 0, end: 1, first: 0}),
             frameRate:8
         });
-        const bone = this.add.sprite(100, 100, "bone", 0).setScale(.8, .8)
-        bone.play("bone")
+        this.bone = new Obstacle(this, 100, 100, "bone").setScale(.8, .8)
+        this.bone.play("bone")
 
 
         //Skull
@@ -65,8 +72,8 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("skull", {start: 0, end: 1, first: 0}),
             frameRate:8
         });
-        const skull = this.add.sprite(100, 200, "skull", 0).setScale(.8, .8)
-        skull.play("skull")
+        this.skull = new Obstacle(this, 100, 200, "skull").setScale(.8, .8)
+        this.skull.play("skull")
 
 
         //Score display
@@ -85,10 +92,43 @@ class Play extends Phaser.Scene{
         this.p1Score = 0;
         this.add.text(70, 448, "Score: ", scoreConfig);
         this.score = this.add.text(90, 450, this.p1Score, scoreConfig);
+
+        this.totalTime = 0;
+        this.add.text(360, 448, "Time: ", scoreConfig);
+        this.time1 = this.add.text(450, 450, this.totalTime, scoreConfig);
+
+        /*this.timer = this.time.addEvent({
+            loop: false,
+            startAt: 0,
+            timeScale: 1,
+            paused: false
+        });*/
         
+
     }
 
     update(){
-        this.p1Boat.update()
+        if(!this.gameOver){
+            this.p1Boat.update()
+            this.skull.update()
+            this.bone.update()
+            this.soul.update()
+        }
+
+        
+
+        // check key input for restart
+        if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyF)) {
+            this.scene.restart(this.p1Score);
+        }
+        if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+            this.scene.start("menuScene");
+        }
+
+        this.totalTime = this.time.now / 1000
+
+        this.time1.text = this.totalTime;
+        //console.log(Phaser.Time.Clock.now)
+
     }
 }

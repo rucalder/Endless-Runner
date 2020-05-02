@@ -8,16 +8,16 @@ class Obstacle extends Phaser.GameObjects.Sprite{
 
     update(){
         //left and right movement
-        this.y -= game.settings.obstacleSpeed
+        this.y += game.settings.obstacleSpeed
         
-        if(this.y <= 0 - this.height){
+        if(this.y >= game.config.height + this.height){
             this.reset();
         }
     }
 
     //reset rocket to ground
     reset(){
-        this.y = Phaser.Math.Between(game.config.height + 50, game.config.height + 150);
+        this.y = Phaser.Math.Between(-50, 0);
         this.x = Phaser.Math.Between(80, 500)
     }
 }

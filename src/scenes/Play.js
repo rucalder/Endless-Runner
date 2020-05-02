@@ -20,7 +20,7 @@ class Play extends Phaser.Scene{
         this.add.rectangle(64, 0, 512, 500, 0x256d7b).setOrigin(0, 0);
         //this.temp = this.add.rectangle(320, 5, 16, 25, 0xFFFFFF).setOrigin(0, 0);
 
-        this.p1Boat = new Boat(this, 320, 5, "charon").setOrigin(0, 0)
+        this.p1Boat = new Boat(this, 320, 440, "charon").setOrigin(0, 0)
         //const boat = this.add.sprite(200, 100, "CHARON SPRITE", 0)
 
 
@@ -78,7 +78,7 @@ class Play extends Phaser.Scene{
 
 
         //Score display
-        let scoreConfig = {
+        this.scoreConfig = {
             fontFamily: "Courier",
             fontSize: "28px",
             //backgroundColor: "#F3B141",
@@ -91,8 +91,9 @@ class Play extends Phaser.Scene{
             fixedWidth: 100
         }
         this.p1Score = 0;
-        this.add.text(70, 448, "Score: ", scoreConfig);
-        this.score = this.add.text(90, 450, this.p1Score, scoreConfig);
+        this.add.text(70, 5, "Score: ", this.scoreConfig);
+        this.score = this.add.text(100, 5, this.p1Score, this.scoreConfig);
+        
 
 
 
@@ -100,16 +101,22 @@ class Play extends Phaser.Scene{
             
         }, null, this);
         this.totalTime = 0;
-        this.add.text(360, 448, "Time: ", scoreConfig);
-        this.time1 = this.add.text(450, 450, this.totalTime, scoreConfig);
+        this.add.text(360, 5, "Time: ", this.scoreConfig);
+        this.time1 = this.add.text(450, 5, this.totalTime, this.scoreConfig);
 
-        this.level = 1;  
+        this.level = 1;
+        this.levelCheck = 0;  
+
+        this.soulGroup = this.add.group()
+        this.soulGroup.add(this.soul)
 
         this.obstacleGroup = this.add.group()
         this.obstacleGroup.add(this.skull)
         this.obstacleGroup.add(this.bone)
 
-        
+        /*this.collider = this.physics.add.collider(this.p1Boat, this.obstacleGroup, function(){
+            this.gameOver = true
+        })*/
 
     }
 
@@ -125,22 +132,37 @@ class Play extends Phaser.Scene{
             this.displayText();
         }
 
+        if(this.p1Boat.checkCollision(this.soul)){
+            this.p1Score += 1
+            this.soul.reset()
+        }
+        if(this.p1Boat.checkCollision(this.skull)){
+            this.gameOver = true
+        }
+        if(this.p1Boat.checkCollision(this.bone)){
+            this.gameOver = true
+        }
+        this.score.text = this.p1Score
+        
+        
+
         /*if(this.game.physics.arcade.collide(this.p1Boat, this.obstacleGroup)){
             this.gameOver = true
         }*/
 
-        this.physics.collide(this.p1Boat, this.obstacleGroup, function(){
+        /*this.world.collide(this.p1Boat, this.obstacleGroup, function(){
             this.gameOver = true
-        })
+        })*/
 
         
 
         // check key input for restart
         if(Phaser.Math.FloorTo(this.clock1.getElapsedSeconds()) % 5 == 0){
-            this.level += 1
+            this.levelCheck += 1
             //console.log(this.level)
         }
-
+        this.level = this.levelCheck/100
+        game.settings.obstacleSpeed = this.level
         
     }
 

@@ -93,6 +93,11 @@ class Play extends Phaser.Scene{
         this.add.text(70, 448, "Score: ", scoreConfig);
         this.score = this.add.text(90, 450, this.p1Score, scoreConfig);
 
+
+
+        this.clock1 = this.time.delayedCall(99999999999999999, () => {
+            
+        }, null, this);
         this.totalTime = 0;
         this.add.text(360, 448, "Time: ", scoreConfig);
         this.time1 = this.add.text(450, 450, this.totalTime, scoreConfig);
@@ -107,7 +112,7 @@ class Play extends Phaser.Scene{
             this.skull.update()
             this.bone.update()
             this.soul.update()
-            this.totalTime = this.time.now / 1000
+            this.time1.text = this.clock1.getElapsedSeconds();
         }
         if(this.gameOver){
             this.displayText();
@@ -125,7 +130,7 @@ class Play extends Phaser.Scene{
             console.log(this.level)
         }
 
-        this.time1.text = this.totalTime;
+        
     }
 
     displayText(){
@@ -151,12 +156,14 @@ class Play extends Phaser.Scene{
             restart.setInteractive();
             restart.on("pointerup", () =>{
                 this.time.now = 0
-                this.scene.start("playScene");
+                this.totalTime = 0
+                this.scene.restart("playScene");
             })
             let menu = this.add.text(centerX + 100, centerY, "Menu", menuConfig).setOrigin(0.5);
             menu.setInteractive();
             menu.on("pointerup", () =>{
                 this.time.now = 0
+                this.totalTime = 0
                 this.scene.start("menuScene");
             })
     }

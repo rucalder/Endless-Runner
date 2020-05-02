@@ -8,6 +8,7 @@ let config = {
 let game = new Phaser.Game(config);
 
 function create(){
+    this.game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.enable(p1Boat, Phaser.Physics.ARCADE);
     game.physics.enable(skull, Phaser.Physics.ARCADE);
     game.physics.enable(bone, Phaser.Physics.ARCADE);

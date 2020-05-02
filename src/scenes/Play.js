@@ -11,6 +11,7 @@ class Play extends Phaser.Scene{
     }
 
     create(){
+        
         this.gameOver = false
 
         // Borders
@@ -104,6 +105,12 @@ class Play extends Phaser.Scene{
 
         this.level = 1;  
 
+        this.obstacleGroup = this.add.group()
+        this.obstacleGroup.add(this.skull)
+        this.obstacleGroup.add(this.bone)
+
+        
+
     }
 
     update(){
@@ -118,16 +125,20 @@ class Play extends Phaser.Scene{
             this.displayText();
         }
 
-        if(this.p1Boat.checkCollision(this.skull)){
+        /*if(this.game.physics.arcade.collide(this.p1Boat, this.obstacleGroup)){
             this.gameOver = true
-        }
+        }*/
+
+        this.physics.collide(this.p1Boat, this.obstacleGroup, function(){
+            this.gameOver = true
+        })
 
         
 
         // check key input for restart
-        if(this.totalTime % 5 == 0){
+        if(Phaser.Math.FloorTo(this.clock1.getElapsedSeconds()) % 5 == 0){
             this.level += 1
-            console.log(this.level)
+            //console.log(this.level)
         }
 
         

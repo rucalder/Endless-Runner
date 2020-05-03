@@ -8,9 +8,25 @@ class Play extends Phaser.Scene{
         this.load.spritesheet("skull", "./assets/skull sprite.png", {frameWidth: 32, frameHeight: 32})
         this.load.spritesheet("soul", "./assets/soul sprite.png", {frameWidth: 32, frameHeight: 32})
         this.load.spritesheet("charon", "./assets/CHARON SPRITE.png", {frameWidth: 32, frameHeight: 32})
+        this.load.audio('bgmusic', './assets/CharonMusicDone.mp3');
+        this.load.audio('crash', './assets/crash.wav');
     }
 
     create(){
+        
+        //bg music for game
+        this.bgmusic = this.sound.add('bgmusic');
+
+        var musicConfig = {
+            mute: false,
+            volume: .3,
+            loop: true,
+        }
+        
+        this.bgmusic.play(musicConfig);
+
+        //initiate crashing noise
+        this.crash = this.sound.add('crash')
         
         this.gameOver = false
 
@@ -132,6 +148,7 @@ class Play extends Phaser.Scene{
         }
         if(this.gameOver){
             this.displayText();
+            this.bgmusic.stop();
         }
 
         if(this.p1Boat.checkCollision(this.soul)){
@@ -169,6 +186,7 @@ class Play extends Phaser.Scene{
         game.settings.obstacleSpeed = this.level
         
     }
+        
 
     gameOver1(){
         this.gameOver = true

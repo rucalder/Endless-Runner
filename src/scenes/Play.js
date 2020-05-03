@@ -218,27 +218,6 @@ class Play extends Phaser.Scene{
             this.displayText();
         }
 
-        // if(this.p1Boat.checkCollision(this.soul)){
-        //     this.soulSound.play();
-        //     this.p1Score += 1
-        //     this.soul.reset()
-        // }
-        // if(this.p1Boat.checkCollision(this.bone)){
-        //     this.gameOver = true
-        // }
-        // if(this.p1Boat.checkCollision(this.skull)){
-        //     this.gameOver = true
-        // }
-        // if(this.p1Boat.checkCollision(this.ribcage)){
-        //     this.gameOver = true
-        // }
-        // if(this.p1Boat.checkCollision(this.spike)){
-        //     this.gameOver = true
-        // }
-        // if(this.p1Boat.checkCollision(this.spike2)){
-        //     this.gameOver = true
-        // }
-        // this.score.text = this.p1Score
 
         //check collisions
         if(this.checkCollision(this.p1Boat, this.bone)) {
@@ -248,27 +227,27 @@ class Play extends Phaser.Scene{
             this.gameOver = true;
         }
         if(this.checkCollision(this.p1Boat, this.skull)) {
-            console.log('skull bone');
+            console.log('dead skull');
             this.boatDead(this.p1Boat);
-            this.bone.reset();
+            this.skull.reset();
             this.gameOver = true;
         }
         if(this.checkCollision(this.p1Boat, this.ribcage)) {
-            console.log('skull bone');
+            console.log('dead rib');
             this.boatDead(this.p1Boat);
-            this.bone.reset();
+            this.ribcage.reset();
             this.gameOver = true;
         }
         if(this.checkCollision(this.p1Boat, this.spike)) {
-            console.log('skull bone');
+            console.log('dead spike');
             this.boatDead(this.p1Boat);
-            this.bone.reset();
+            this.spike.reset();
             this.gameOver = true;
         }
         if(this.checkCollision(this.p1Boat, this.spike2)) {
-            console.log('skull bone');
+            console.log('dead spike2');
             this.boatDead(this.p1Boat);
-            this.bone.reset();
+            this.spike2.reset();
             this.gameOver = true;
         }
         if(this.checkCollision(this.p1Boat, this.soul)) {

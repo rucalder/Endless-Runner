@@ -49,37 +49,24 @@ class Menu extends Phaser.Scene{
         let centerY = game.config.height/2;
         let textSpacer = 64;
 
-        this.add.text(centerX, centerY - textSpacer, "Temp", menuConfig).setOrigin(0.5);
-        
-        
         menuConfig.backgroundColor = "#00FF00";
         menuConfig.color = "#000";
         
-        let playButton = this.add.text(centerX, centerY, "Play", menuConfig).setOrigin(0.5);
+        /*let playButton = this.add.text(centerX, centerY, "Play", menuConfig).setOrigin(0.5);
         playButton.setInteractive();
         playButton.on("pointerup", () =>{
             this.scene.start("playScene");
-        })
-
-
-        this.add.text(20, 20, "Temp Menu");
-        //this.scene.start("playScene");
+        })*/
 
         //define keys
-        //keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         //keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     }
 
     update() {
-        /*if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+        if (Phaser.Input.Keyboard.JustDown(keyA)) {
           // easy mode
-          game.settings = {
-            spaceshipSpeed: 3,
-            gameTimer1: 60000,
-            gameTimer2: 60000    
-          }
-          this.sound.play('sfx_select');
-          this.scene.start("playScene");    
-        }*/
+          this.scene.start("playScene")
+        }
       }
 }

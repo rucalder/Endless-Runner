@@ -2,7 +2,13 @@ let config = {
     type: Phaser.CANVAS,
     width: 640,
     height: 480,
-    scene: [Menu, Play]
+    scene: [Menu, Play],
+    physics:{
+        default: "arcade",
+        arcade: {
+            //debug: true,
+        }
+    }
 }
 
 let game = new Phaser.Game(config);
@@ -16,6 +22,7 @@ function create(){
     game.physics.enable(ribcage, Phaser.Physics.ARCADE);
     game.physics.enable(spike, Phaser.Physics.ARCADE);
     game.physics.enable(spike2, Phaser.Physics.ARCADE);
+    
 }
 
 game.settings = {
@@ -23,4 +30,4 @@ game.settings = {
     gameTimer1: 60000,  
 }
 
-let keyF, keyLEFT, keyRIGHT, keyUP, keyDOWN;
+let keyA, keyLEFT, keyRIGHT, keyUP, keyDOWN;

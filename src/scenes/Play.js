@@ -26,7 +26,7 @@ class Play extends Phaser.Scene{
         this.crash = this.sound.add('crash');
 
         this.bgmusic.play({
-            volume: .3,
+            volume: .5,
             loop: true
         })
         
@@ -299,7 +299,10 @@ class Play extends Phaser.Scene{
 
     boatDead(boat){
         boat.alpha = 0;
-        this.crash.play();
+        this.crash.play({
+            volume: .3,
+            loop: false
+        })
     }
 
     gameOver1(){

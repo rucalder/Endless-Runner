@@ -6,11 +6,20 @@ class Menu extends Phaser.Scene{
     preload() {
         // load audio
         //this.load.audio('sfx_select', './assets/blip_select12.wav');
-        this.load.spritesheet("screen", "./assets/spritesheet.png", {frameWidth: 502, frameHeight: 502})
+        this.load.spritesheet("screen", "./assets/spritesheet.png", {frameWidth: 502, frameHeight: 502});
+        this.load.audio('bgmusic', './assets/CharonMusicDone.mp3');
         
     }
 
     create(){
+        //bg music for game
+        let bgmusic = this.sound.add('bgmusic');
+
+        bgmusic.play({
+            volume: .3,
+            loop: true
+        })
+
         this.titleScreen = this.add.sprite(this, 0, 0, "screen").setOrigin(0, 0)
         this.anims.create({
             key: "title",

@@ -13,6 +13,9 @@ function create(){
     game.physics.enable(skull, Phaser.Physics.ARCADE);
     game.physics.enable(bone, Phaser.Physics.ARCADE);
     game.physics.enable(soul, Phaser.Physics.ARCADE);
+    game.physics.enable(ribcage, Phaser.Physics.ARCADE);
+    game.physics.enable(spike, Phaser.Physics.ARCADE);
+    game.physics.enable(spike2, Phaser.Physics.ARCADE);
 }
 
 game.settings = {

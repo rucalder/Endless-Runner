@@ -14,12 +14,12 @@ class Menu extends Phaser.Scene{
 
     create(){
         //bg music for game
-        let bgmusic = this.sound.add('bgmusic');
+        /*let bgmusic = this.sound.add('bgmusic');
 
         bgmusic.play({
             volume: .3,
             loop: true
-        })
+        })*/
 
         this.titleScreen = this.add.sprite(this, 0, 0, "screen").setOrigin(0, 0)
         this.anims.create({

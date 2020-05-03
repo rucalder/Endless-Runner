@@ -251,7 +251,7 @@ class Play extends Phaser.Scene{
             this.gameOver = true;
         }
         if(this.checkCollision(this.p1Boat, this.soul)) {
-            console.log('dead soul');
+            console.log('collect soul');
             this.soulSound.play();
             this.p1Score += 1;
             this.soul.reset();

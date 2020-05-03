@@ -10,12 +10,15 @@ class Play extends Phaser.Scene{
         this.load.spritesheet("charon", "./assets/CHARON SPRITE.png", {frameWidth: 32, frameHeight: 32})
         this.load.audio('bgmusic', './assets/CharonMusicDone.mp3');
         this.load.audio('crash', './assets/crash.wav');
+        this.load.audio('soulSound', './assets/soulSound.wav');
     }
 
     create(){
         
         //bg music for game
         this.bgmusic = this.sound.add('bgmusic');
+        //soul sound 
+        this.soulSound = this.sound.add('soulSound');
 
         var musicConfig = {
             mute: false,
@@ -149,6 +152,7 @@ class Play extends Phaser.Scene{
         }
 
         if(this.p1Boat.checkCollision(this.soul)){
+            this.soulSound.play();
             this.p1Score += 1
             this.soul.reset()
         }

@@ -24,9 +24,6 @@ class Play extends Phaser.Scene{
         }
         
         this.bgmusic.play(musicConfig);
-
-        //initiate crashing noise
-        this.crash = this.sound.add('crash')
         
         this.gameOver = false
 
@@ -187,6 +184,15 @@ class Play extends Phaser.Scene{
         
     }
         
+    playCrash(){
+        //initiate crashing noise
+        this.crash = this.sound.add('crash')
+        var crashConfig = {
+            volume: .3,
+            loop: false
+        }
+        this.crash.play(crashConfig);
+    }
 
     gameOver1(){
         this.gameOver = true

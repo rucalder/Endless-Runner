@@ -8,6 +8,7 @@ class Menu extends Phaser.Scene{
         //this.load.audio('sfx_select', './assets/blip_select12.wav');
         this.load.spritesheet("screen", "./assets/spritesheet.png", {frameWidth: 502, frameHeight: 502});
         this.load.audio('bgmusic', './assets/CharonMusicDone.mp3');
+        this.load.audio('crash', './assets/crash.wav');
         
     }
 

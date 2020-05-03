@@ -18,9 +18,12 @@ class Play extends Phaser.Scene{
     }
 
     create(){
+        //bg music for game
         this.bgmusic = this.sound.add('bgmusic');
         //soul sound 
         this.soulSound = this.sound.add('soulSound');
+        //game over sound
+        this.soulSound = this.sound.add('crash');
 
         this.bgmusic.play({
             volume: .3,

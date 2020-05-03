@@ -114,6 +114,8 @@ class Play extends Phaser.Scene{
         this.obstacleGroup.add(this.skull)
         this.obstacleGroup.add(this.bone)
 
+        //Phaser.Physics.Arcade.Collider(this.p1Boat, this.obstacleGroup, this.gameOver1())
+        
         /*this.collider = this.physics.add.collider(this.p1Boat, this.obstacleGroup, function(){
             this.gameOver = true
         })*/
@@ -136,7 +138,7 @@ class Play extends Phaser.Scene{
             this.p1Score += 1
             this.soul.reset()
         }
-        if(this.p1Boat.checkCollision(this.skull)){
+        if(this.p1Boat.checkCollision(this.obstacleGroup)){
             this.gameOver = true
         }
         if(this.p1Boat.checkCollision(this.bone)){
@@ -148,12 +150,14 @@ class Play extends Phaser.Scene{
 
         /*if(this.game.physics.arcade.collide(this.p1Boat, this.obstacleGroup)){
             this.gameOver = true
-        }*/
+        }
 
         /*this.world.collide(this.p1Boat, this.obstacleGroup, function(){
             this.gameOver = true
         })*/
-
+        /*if(Phaser.Math.FloorTo(this.clock1.getElapsedSeconds() / 1.1) != 0){
+            Phaser.Physics.Arcade.Collider(this.p1Boat, this.obstacleGroup, this.gameOver1())
+        }*/
         
 
         // check key input for restart
@@ -164,6 +168,10 @@ class Play extends Phaser.Scene{
         this.level = this.levelCheck/100
         game.settings.obstacleSpeed = this.level
         
+    }
+
+    gameOver1(){
+        this.gameOver = true
     }
 
     displayText(){

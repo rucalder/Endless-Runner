@@ -4,29 +4,28 @@ class Play extends Phaser.Scene{
     }
 
     preload(){
-        this.load.spritesheet("bone", "./assets/bone sprite.png", {frameWidth: 32, frameHeight: 32})
-        this.load.spritesheet("skull", "./assets/skull sprite.png", {frameWidth: 32, frameHeight: 32})
+        this.load.spritesheet("bone", "./assets/bone.png", {frameWidth: 32, frameHeight: 32})
+        this.load.spritesheet("skull", "./assets/skull.png", {frameWidth: 32, frameHeight: 32})
         this.load.spritesheet("soul", "./assets/soul sprite.png", {frameWidth: 32, frameHeight: 32})
+        this.load.spritesheet("spike", "./assets/spike.png", {frameWidth: 32, frameHeight: 32})
+        this.load.spritesheet("2spike", "./assets/2spike.png", {frameWidth: 32, frameHeight: 32})
+        this.load.spritesheet("ribcage", "./assets/ribcage.png", {frameWidth: 32, frameHeight: 32})
         this.load.spritesheet("charon", "./assets/CHARON SPRITE.png", {frameWidth: 32, frameHeight: 32})
+        this.load.spritesheet("river", "./assets/RIVER SPRITE.png", {frameWidth: 640, frameHeight: 980})
         this.load.audio('bgmusic', './assets/CharonMusicDone.mp3');
         this.load.audio('crash', './assets/crash.wav');
         this.load.audio('soulSound', './assets/soulSound.wav');
     }
 
     create(){
-        
-        //bg music for game
         this.bgmusic = this.sound.add('bgmusic');
         //soul sound 
         this.soulSound = this.sound.add('soulSound');
 
-        var musicConfig = {
-            mute: false,
+        this.bgmusic.play({
             volume: .3,
-            loop: true,
-        }
-        
-        this.bgmusic.play(musicConfig);
+            loop: true
+        })
         
         this.gameOver = false
 
@@ -34,6 +33,14 @@ class Play extends Phaser.Scene{
         this.add.rectangle(0, 0, 64, 500, 0xF5F5DC).setOrigin(0, 0);
         this.add.rectangle(576, 0, 64, 500, 0xF5F5DC).setOrigin(0, 0);
         this.add.rectangle(64, 0, 512, 500, 0x256d7b).setOrigin(0, 0);
+        /*this.river = this.add.sprite(this, 0, 0, "river").setOrigin(0, 0)
+        this.anims.create({
+            key: "river",
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers("river", {start: 0, end: 2, first: 0}),
+            frameRate:8
+        });
+        this.river.play("river")*/
         //this.temp = this.add.rectangle(320, 5, 16, 25, 0xFFFFFF).setOrigin(0, 0);
 
         this.p1Boat = new Boat(this, 320, 440, "charon").setOrigin(0, 0)
@@ -92,6 +99,38 @@ class Play extends Phaser.Scene{
         this.skull = new Obstacle(this, 100, 200, "skull").setScale(.8, .8)
         this.skull.play("skull")
 
+        //ribcage
+        this.anims.create({
+            key: "ribcage",
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers("ribcage", {start: 0, end: 1, first: 0}),
+            frameRate:8
+        });
+        this.ribcage = new Obstacle(this, 0, 0, "ribcage").setScale(.8, .8)
+        this.ribcage.play("ribcage")
+        this.ribcage.setActive(false).setVisible(false);
+
+        //spike
+        this.anims.create({
+            key: "spike",
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers("spike", {start: 0, end: 1, first: 0}),
+            frameRate:8
+        });
+        this.spike = new Obstacle(this, 0, 0, "spike").setScale(.8, .8)
+        this.spike.play("spike")
+        this.spike.setActive(false).setVisible(false);
+
+        //spike2
+        this.anims.create({
+            key: "2spike",
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers("2spike", {start: 0, end: 1, first: 0}),
+            frameRate:8
+        });
+        this.spike2 = new Obstacle(this, 0, 0, "2spike").setScale(.8, .8)
+        this.spike2.play("2spike")
+        this.spike2.setActive(false).setVisible(false);
 
         //Score display
         this.scoreConfig = {
@@ -116,6 +155,23 @@ class Play extends Phaser.Scene{
         this.clock1 = this.time.delayedCall(99999999999999999, () => {
             
         }, null, this);
+
+        this.clock2 = this.time.delayedCall(10000, () => {
+            this.ribcage.setActive(true).setVisible(true);
+            this.ribcage.reset()
+        }, null, this);
+
+        this.clock3 = this.time.delayedCall(20000, () => {
+            this.spike.setActive(true).setVisible(true);
+            this.spike.reset()
+        }, null, this);
+        this.clock4 = this.time.delayedCall(30000, () => {
+            this.spike2.setActive(true).setVisible(true);
+            this.spike2.reset()
+        }, null, this);
+
+        
+
         this.totalTime = 0;
         this.add.text(360, 5, "Time: ", this.scoreConfig);
         this.time1 = this.add.text(450, 5, this.totalTime, this.scoreConfig);
@@ -144,11 +200,19 @@ class Play extends Phaser.Scene{
             this.skull.update()
             this.bone.update()
             this.soul.update()
+            if(this.clock2.getProgress() == 1){
+                this.ribcage.update()
+            }
+            if(this.clock3.getProgress() == 1){
+                this.spike.update()
+            }
+            if(this.clock4.getProgress() == 1){
+                this.spike2.update()
+            }
             this.time1.text = this.clock1.getElapsedSeconds();
         }
         if(this.gameOver){
             this.displayText();
-            this.bgmusic.stop();
         }
 
         if(this.p1Boat.checkCollision(this.soul)){
@@ -156,17 +220,31 @@ class Play extends Phaser.Scene{
             this.p1Score += 1
             this.soul.reset()
         }
-        if(this.p1Boat.checkCollision(this.obstacleGroup)){
+        if(this.p1Boat.checkCollision(this.bone)){
             this.gameOver = true
         }
-        if(this.p1Boat.checkCollision(this.bone)){
+        if(this.p1Boat.checkCollision(this.skull)){
+            this.gameOver = true
+        }
+        if(this.p1Boat.checkCollision(this.ribcage)){
+            this.gameOver = true
+        }
+        if(this.p1Boat.checkCollision(this.spike)){
+            this.gameOver = true
+        }
+        if(this.p1Boat.checkCollision(this.spike2)){
             this.gameOver = true
         }
         this.score.text = this.p1Score
         
-        
 
-        /*if(this.game.physics.arcade.collide(this.p1Boat, this.obstacleGroup)){
+
+
+
+        /*if(game.physics.arcade.collide(this.p1Boat, this.obstacleGroup)){
+            this.gameOver = true
+        }
+        if(this.game.physics.arcade.collide(this.p1Boat, this.obstacleGroup)){
             this.gameOver = true
         }
 
@@ -187,22 +265,13 @@ class Play extends Phaser.Scene{
         game.settings.obstacleSpeed = this.level
         
     }
-        
-    // playCrash(){
-    //     //initiate crashing noise
-    //     this.crash = this.sound.add('crash')
-    //     var crashConfig = {
-    //         volume: .3,
-    //         loop: false
-    //     }
-    //     this.crash.play(crashConfig);
-    // }
 
     gameOver1(){
         this.gameOver = true
     }
 
     displayText(){
+        this.bgmusic.stop()
 
         let menuConfig = {
             fontFamily: "Courier",

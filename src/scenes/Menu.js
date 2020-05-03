@@ -6,10 +6,20 @@ class Menu extends Phaser.Scene{
     preload() {
         // load audio
         //this.load.audio('sfx_select', './assets/blip_select12.wav');
+        this.load.spritesheet("screen", "./assets/spritesheet.png", {frameWidth: 502, frameHeight: 502})
         
     }
 
     create(){
+        this.titleScreen = this.add.sprite(this, 0, 0, "screen").setOrigin(0, 0)
+        this.anims.create({
+            key: "title",
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers("screen", {start: 0, end: 2, first: 0}),
+            frameRate:8
+        });
+        this.titleScreen.play("title")
+
         //score display
         let menuConfig = {
             fontFamily: "Courier",

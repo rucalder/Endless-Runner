@@ -23,7 +23,7 @@ class Play extends Phaser.Scene{
         //soul sound 
         this.soulSound = this.sound.add('soulSound');
         //game over sound
-        this.soulSound = this.sound.add('crash');
+        this.crash = this.sound.add('crash');
 
         this.bgmusic.play({
             volume: .3,
@@ -253,12 +253,31 @@ class Play extends Phaser.Scene{
             this.bone.reset();
             this.gameOver = true;
         }
+        if(this.checkCollision(this.p1Boat, this.ribcage)) {
+            console.log('skull bone');
+            this.boatDead(this.p1Boat);
+            this.bone.reset();
+            this.gameOver = true;
+        }
+        if(this.checkCollision(this.p1Boat, this.spike)) {
+            console.log('skull bone');
+            this.boatDead(this.p1Boat);
+            this.bone.reset();
+            this.gameOver = true;
+        }
+        if(this.checkCollision(this.p1Boat, this.spike2)) {
+            console.log('skull bone');
+            this.boatDead(this.p1Boat);
+            this.bone.reset();
+            this.gameOver = true;
+        }
         if(this.checkCollision(this.p1Boat, this.soul)) {
             console.log('dead soul');
             this.soulSound.play();
             this.p1Score += 1;
             this.soul.reset();
         }
+        this.score.text = this.p1Score
 
 
 
@@ -286,6 +305,22 @@ class Play extends Phaser.Scene{
         this.level = this.levelCheck/100
         game.settings.obstacleSpeed = this.level
         
+    }
+
+    checkCollision(boat, obstacle){
+        if (boat.x < obstacle.x + obstacle.width && 
+            boat.x + boat.width > obstacle.x && 
+            boat.y < obstacle.y + obstacle.height &&
+            obstacle.height + obstacle.y > obstacle. y) {
+                return true;
+        } else {
+            return false;
+        }
+    }
+
+    boatDead(boat){
+        boat.alpha = 0;
+        this.crash.play();
     }
 
     gameOver1(){

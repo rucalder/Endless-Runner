@@ -77,7 +77,7 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("soul", {start: 0, end: 2, first: 0}),
             frameRate:8
         });
-        this.soul = new Soul(this, 560, 100, "soul").setScale(.8, .8)
+        this.soul = new Soul(this, 560, 100, "soul")//.setScale(.8, .8)
         this.soul.play("soul")
 
 
@@ -88,7 +88,7 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("bone", {start: 0, end: 1, first: 0}),
             frameRate:8
         });
-        this.bone = new Obstacle(this, 100, 100, "bone").setScale(.8, .8)
+        this.bone = new Obstacle(this, 100, 100, "bone")//.setScale(.8, .8)
         this.bone.play("bone")
 
 
@@ -99,7 +99,7 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("skull", {start: 0, end: 1, first: 0}),
             frameRate:8
         });
-        this.skull = new Obstacle(this, 100, 200, "skull").setScale(.8, .8)
+        this.skull = new Obstacle(this, 100, 200, "skull")//.setScale(.8, .8)
         this.skull.play("skull")
 
         //ribcage
@@ -182,12 +182,12 @@ class Play extends Phaser.Scene{
         this.level = 1;
         this.levelCheck = 0;  
 
-        this.soulGroup = this.add.group()
-        this.soulGroup.add(this.soul)
+        // this.soulGroup = this.add.group()
+        // this.soulGroup.add(this.soul)
 
-        this.obstacleGroup = this.add.group()
-        this.obstacleGroup.add(this.skull)
-        this.obstacleGroup.add(this.bone)
+        // this.obstacleGroup = this.add.group()
+        // this.obstacleGroup.add(this.skull)
+        // this.obstacleGroup.add(this.bone)
 
         //Phaser.Physics.Arcade.Collider(this.p1Boat, this.obstacleGroup, this.gameOver1())
         
@@ -218,28 +218,47 @@ class Play extends Phaser.Scene{
             this.displayText();
         }
 
-        if(this.p1Boat.checkCollision(this.soul)){
+        // if(this.p1Boat.checkCollision(this.soul)){
+        //     this.soulSound.play();
+        //     this.p1Score += 1
+        //     this.soul.reset()
+        // }
+        // if(this.p1Boat.checkCollision(this.bone)){
+        //     this.gameOver = true
+        // }
+        // if(this.p1Boat.checkCollision(this.skull)){
+        //     this.gameOver = true
+        // }
+        // if(this.p1Boat.checkCollision(this.ribcage)){
+        //     this.gameOver = true
+        // }
+        // if(this.p1Boat.checkCollision(this.spike)){
+        //     this.gameOver = true
+        // }
+        // if(this.p1Boat.checkCollision(this.spike2)){
+        //     this.gameOver = true
+        // }
+        // this.score.text = this.p1Score
+
+        //check collisions
+        if(this.checkCollision(this.p1Boat, this.bone)) {
+            console.log('dead bone');
+            this.boatDead(this.p1Boat);
+            this.bone.reset();
+            this.gameOver = true;
+        }
+        if(this.checkCollision(this.p1Boat, this.skull)) {
+            console.log('skull bone');
+            this.boatDead(this.p1Boat);
+            this.bone.reset();
+            this.gameOver = true;
+        }
+        if(this.checkCollision(this.p1Boat, this.soul)) {
+            console.log('dead soul');
             this.soulSound.play();
-            this.p1Score += 1
-            this.soul.reset()
+            this.p1Score += 1;
+            this.soul.reset();
         }
-        if(this.p1Boat.checkCollision(this.bone)){
-            this.gameOver = true
-        }
-        if(this.p1Boat.checkCollision(this.skull)){
-            this.gameOver = true
-        }
-        if(this.p1Boat.checkCollision(this.ribcage)){
-            this.gameOver = true
-        }
-        if(this.p1Boat.checkCollision(this.spike)){
-            this.gameOver = true
-        }
-        if(this.p1Boat.checkCollision(this.spike2)){
-            this.gameOver = true
-        }
-        this.score.text = this.p1Score
-        
 
 
 

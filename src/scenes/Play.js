@@ -11,7 +11,7 @@ class Play extends Phaser.Scene{
         this.load.spritesheet("2spike", "./assets/2spike.png", {frameWidth: 32, frameHeight: 32})
         this.load.spritesheet("ribcage", "./assets/ribcage.png", {frameWidth: 32, frameHeight: 32})
         this.load.spritesheet("charon", "./assets/CHARON SPRITE.png", {frameWidth: 32, frameHeight: 32})
-        this.load.spritesheet("river", "./assets/RIVER SPRITE.png", {frameWidth: 640, frameHeight: 980})
+        this.load.image("river", "./assets/RIVER SPRITE.png")
         this.load.audio('bgmusic', './assets/CharonMusicDone.mp3');
         this.load.audio('crash', './assets/crash.wav');
         this.load.audio('soulSound', './assets/soulSound.wav');
@@ -36,15 +36,7 @@ class Play extends Phaser.Scene{
         this.add.rectangle(0, 0, 64, 500, 0xF5F5DC).setOrigin(0, 0);
         this.add.rectangle(576, 0, 64, 500, 0xF5F5DC).setOrigin(0, 0);
         this.add.rectangle(64, 0, 512, 500, 0x256d7b).setOrigin(0, 0);
-        /*this.river = this.add.sprite(this, 0, 0, "river").setOrigin(0, 0)
-        this.anims.create({
-            key: "river",
-            repeat: -1,
-            frames: this.anims.generateFrameNumbers("river", {start: 0, end: 2, first: 0}),
-            frameRate:8
-        });
-        this.river.play("river")*/
-        //this.temp = this.add.rectangle(320, 5, 16, 25, 0xFFFFFF).setOrigin(0, 0);
+        this.river = this.add.tileSprite(0, 0, 640, 480, "river").setOrigin(0, 0)
 
         this.p1Boat = new Boat(this, 320, 440).setOrigin(0, 0)
         //const boat = this.add.sprite(200, 100, "CHARON SPRITE", 0)
@@ -203,7 +195,9 @@ class Play extends Phaser.Scene{
     }
 
     update(){
+        
         if(!this.gameOver){
+            this.river.tilePositionY -= game.settings.obstacleSpeed;
             this.p1Boat.update()
             this.skull.update()
             this.bone.update()

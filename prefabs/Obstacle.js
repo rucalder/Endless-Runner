@@ -17,7 +17,7 @@ class Obstacle extends Phaser.GameObjects.Sprite{
 
     //reset rocket to ground
     reset(){
-        this.y = Phaser.Math.Between(-50, 0);
+        this.y = Phaser.Math.Between(-300, 0);
         this.x = Phaser.Math.Between(80, 500)
     }
 }

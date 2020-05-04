@@ -90,6 +90,7 @@ class Play extends Phaser.Scene{
         });
         this.bone = new Obstacle(this, 100, 100)//.setScale(.8, .8)
         this.bone.play("bone")
+        this.bone.setSize(16, 16, true);
 
 
         //Skull
@@ -101,6 +102,7 @@ class Play extends Phaser.Scene{
         });
         this.skull = new Obstacle(this, 100, 200)//.setScale(.8, .8)
         this.skull.play("skull")
+        this.skull.setSize(16, 16, true);
 
         //ribcage
         this.anims.create({
@@ -112,6 +114,7 @@ class Play extends Phaser.Scene{
         this.ribcage = new Obstacle(this, 0, 0)//.setScale(.8, .8)
         this.ribcage.play("ribcage")
         this.ribcage.setActive(false).setVisible(false);
+        this.ribcage.setSize(16, 16, true);
 
         //spike
         this.anims.create({
@@ -123,6 +126,7 @@ class Play extends Phaser.Scene{
         this.spike = new Obstacle(this, 0, 0)//.setScale(.8, .8)
         this.spike.play("spike")
         this.spike.setActive(false).setVisible(false);
+        this.spike.setSize(16, 16, true);
 
         //spike2
         this.anims.create({
@@ -134,6 +138,7 @@ class Play extends Phaser.Scene{
         this.spike2 = new Obstacle(this, 0, 0)//.setScale(.8, .8)
         this.spike2.play("2spike")
         this.spike2.setActive(false).setVisible(false);
+        this.spike2.setSize(16, 16, true);
 
         //Score display
         this.scoreConfig = {
@@ -185,18 +190,15 @@ class Play extends Phaser.Scene{
         // this.soulGroup = this.add.group()
         // this.soulGroup.add(this.soul)
 
-         this.obstacleGroup = this.add.group()
+         /*this.obstacleGroup = this.add.group()
          this.obstacleGroup.add(this.skull)
          this.obstacleGroup.add(this.bone)
          this.obstacleGroup.add(this.ribcage)
          this.obstacleGroup.add(this.spike)
-         this.obstacleGroup.add(this.spike2)
+         this.obstacleGroup.add(this.spike2)*/
 
-        //Phaser.Physics.Arcade.Collider(this.p1Boat, this.obstacleGroup, this.gameOver1())
+         //this.physics.add.collider(this.p1Boat, this.obstacleGroup, this.boatDead(this.p1Boat));
         
-        /*this.collider = this.physics.add.collider(this.p1Boat, this.obstacleGroup, function(){
-            this.gameOver = true
-        })*/
 
     }
 
@@ -228,6 +230,7 @@ class Play extends Phaser.Scene{
             this.gameOver = true;    
         }*/
 
+        
 
         //check collisions
         if(this.checkCollision(this.p1Boat, this.bone)) {
@@ -300,7 +303,7 @@ class Play extends Phaser.Scene{
         if (boat.x < obstacle.x + obstacle.width && 
             boat.x + boat.width > obstacle.x && 
             boat.y < obstacle.y + obstacle.height &&
-            obstacle.height + obstacle.y > obstacle. y) {
+            boat.height + boat.y > obstacle.y) {
                 return true;
         } else {
             return false;

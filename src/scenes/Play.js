@@ -12,6 +12,8 @@ class Play extends Phaser.Scene{
         this.load.spritesheet("ribcage", "./assets/ribcage.png", {frameWidth: 32, frameHeight: 32})
         this.load.spritesheet("charon", "./assets/CHARON SPRITE.png", {frameWidth: 32, frameHeight: 32})
         this.load.image("river", "./assets/RIVER SPRITE.png")
+        this.load.image("shadowSmall", "./assets/Shadow1.png");
+        this.load.image("shadowLarge", "./assets/Shadow2.png");
         this.load.audio('bgmusic', './assets/CharonMusicDone.mp3');
         this.load.audio('crash', './assets/crash.wav');
         this.load.audio('soulSound', './assets/soulSound.wav');

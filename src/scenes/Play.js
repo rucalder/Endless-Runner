@@ -32,16 +32,8 @@ class Play extends Phaser.Scene{
         
         this.gameOver = false
 
-<<<<<<< HEAD
         //River 
         this.river = this.add.tileSprite(0, 0, 640, 480, "river").setOrigin(0, 0)
-=======
-        // Borders
-        //this.add.rectangle(0, 0, 64, 500, 0xF5F5DC).setOrigin(0, 0);
-        //this.add.rectangle(576, 0, 64, 500, 0xF5F5DC).setOrigin(0, 0);
-        //this.add.rectangle(64, 0, 512, 500, 0x256d7b).setOrigin(0, 0);
-        this.river = this.add.tileSprite(0, 0, 640, 980, "river").setOrigin(0, 0)
->>>>>>> 7801b83832492350872f15ddb302507e7fb8a535
 
         this.p1Boat = new Boat(this, 320, 440).setOrigin(0, 0)
         //const boat = this.add.sprite(200, 100, "CHARON SPRITE", 0)

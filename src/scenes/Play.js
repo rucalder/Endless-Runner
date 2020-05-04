@@ -203,32 +203,6 @@ class Play extends Phaser.Scene{
         this.add.text(360, 5, "Time: ", this.scoreConfig);
         this.time1 = this.add.text(450, 5, this.totalTime, this.scoreConfig);
 
-<<<<<<< HEAD
-        this.level = 1;
-        this.levelCheck = 0;  
-
-
-        //DarkCircles
-        let circleSize = 5;
-        this.p1CircleLarge = new Darkness(this, 320, 440, "shadowLarge")
-        this.p1CircleSmall = new Darkness(this, 320, 440, "shadowSmall").setScale(circleSize, circleSize)
-        this.p1CircleLarge.alpha = 0.7
-
-        this.p1CircleLarge.enableBody = true;
-        this.p1CircleSmall.enableBody = true;
-
-        // Soul Animation
-        this.anims.create({
-            key: "soul",
-            repeat: -1,
-            frames: this.anims.generateFrameNumbers("soul", {start: 0, end: 2, first: 0}),
-            frameRate:8
-        });
-        this.soul = new Obstacle(this, 560, 100).setScale(1.5, 1.5)
-        this.soul.play("soul")
-
-=======
->>>>>>> 3140d6991ad4960f1b45314fea82fabc5175ee0b
     }
 
     update(){
@@ -346,7 +320,7 @@ class Play extends Phaser.Scene{
         let menuConfig = {
             fontFamily: "Courier",
             fontSize: "26px",
-            backgroundColor: "#F3B141",
+            backgroundColor: "#8B008B",
             color: "#123456",
             align: "right",
             padding: {

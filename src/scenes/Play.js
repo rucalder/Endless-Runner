@@ -258,7 +258,7 @@ class Play extends Phaser.Scene{
             console.log('collect soul');
             this.soulSound.play({
                 volume: .3,
-                loop: true
+                loop: false
             })
             this.p1Score += 1;
             this.soul.reset();

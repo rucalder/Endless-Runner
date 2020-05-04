@@ -36,7 +36,7 @@ class Play extends Phaser.Scene{
         //this.add.rectangle(0, 0, 64, 500, 0xF5F5DC).setOrigin(0, 0);
         //this.add.rectangle(576, 0, 64, 500, 0xF5F5DC).setOrigin(0, 0);
         //this.add.rectangle(64, 0, 512, 500, 0x256d7b).setOrigin(0, 0);
-        this.river = this.add.tileSprite(0, 0, 640, 480, "river").setOrigin(0, 0)
+        this.river = this.add.tileSprite(0, 0, 640, 980, "river").setOrigin(0, 0)
 
         this.p1Boat = new Boat(this, 320, 440).setOrigin(0, 0)
         //const boat = this.add.sprite(200, 100, "CHARON SPRITE", 0)
@@ -69,7 +69,7 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("soul", {start: 0, end: 2, first: 0}),
             frameRate:8
         });
-        this.soul = new Obstacle(this, 560, 100)
+        this.soul = new Obstacle(this, 560, 100).setScale(1.3, 1.3)
         this.soul.play("soul")
 
 

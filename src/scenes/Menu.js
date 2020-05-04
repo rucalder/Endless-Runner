@@ -6,7 +6,7 @@ class Menu extends Phaser.Scene{
     preload() {
         // load audio
         //this.load.audio('sfx_select', './assets/blip_select12.wav');
-        this.load.spritesheet("screen", "./assets/finalMenu.png", {frameWidth: 642, frameHeight: 482});
+        this.load.spritesheet("screen", "./assets/finalMenu.png", {frameWidth: 640, frameHeight: 480});
         
     }
 
@@ -15,9 +15,10 @@ class Menu extends Phaser.Scene{
         this.anims.create({
             key: "title",
             repeat: -1,
-            frames: this.anims.generateFrameNumbers("screen", {start: 0, end: 3, first: 0}),
+            frames: this.anims.generateFrameNumbers("screen", {start: 0, end: 2, first: 0}),
             frameRate:8
         });
+        this.titleScreen = this.add.sprite(this, 0, 0).setOrigin(0, 0)
         this.titleScreen.play("title")
 
         //score display

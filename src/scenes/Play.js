@@ -190,7 +190,7 @@ class Play extends Phaser.Scene{
         this.anims.create({
             key: "soul",
             repeat: -1,
-            frames: this.anims.generateFrameNumbers("soul", {start: 0, end: 2, first: 0}),
+            frames: this.anims.generateFrameNumbers("soul", {start: 0, end: 1, first: 0}),
             frameRate:8
         });
         this.soul = new Obstacle(this, 320, 200).setScale(1.5, 1.5)

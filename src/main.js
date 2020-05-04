@@ -3,10 +3,11 @@ let config = {
     width: 640,
     height: 480,
     scene: [Menu, Play],
-    physics:{
-        default: "arcade",
+    physics: {
+        default: 'arcade',
         arcade: {
             debug: true,
+            //gravity: { y: 200 }
         }
     }
 }

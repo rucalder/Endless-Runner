@@ -9,16 +9,16 @@ class Darkness extends Phaser.GameObjects.Sprite{
     update(){
         //left and right movement
         if (keyLEFT.isDown && this.x >= 74){
-            this.x -= 2;
+            this.x -= 4;
         }
         if (keyRIGHT.isDown && this.x <= 570){
-            this.x += 2;
+            this.x += 4;
         }
         if (keyDOWN.isDown && this.y <= 505){
-            this.y += 2;
+            this.y += 4;
         }
         if (keyUP.isDown && this.y >= 45){
-            this.y -= 2;
+            this.y -= 4;
         }
         
     }

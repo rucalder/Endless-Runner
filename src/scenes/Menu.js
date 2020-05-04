@@ -24,7 +24,7 @@ class Menu extends Phaser.Scene{
         let menuConfig = {
             fontFamily: "Courier",
             fontSize: "26px",
-            backgroundColor: "#F3B141",
+            backgroundColor: "#8B008B",
             color: "#123456",
             align: "right",
             padding: {
@@ -39,14 +39,16 @@ class Menu extends Phaser.Scene{
         let centerY = game.config.height/2;
         let textSpacer = 64;
 
-        menuConfig.backgroundColor = "#00FF00";
-        menuConfig.color = "#000";
+        //menuConfig.backgroundColor = "#00FF00";
+        menuConfig.color = "#FFFFFF";
         
         /*let playButton = this.add.text(centerX, centerY, "Play", menuConfig).setOrigin(0.5);
         playButton.setInteractive();
         playButton.on("pointerup", () =>{
             this.scene.start("playScene");
         })*/
+
+        this.add.text(centerX, 460, 'Use arrow keys to collect souls', menuConfig).setOrigin(0.5);
 
         //define keys
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);

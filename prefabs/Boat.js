@@ -9,16 +9,16 @@ class Boat extends Phaser.GameObjects.Sprite{
     update(){
         //left and right movement
         if (keyLEFT.isDown && this.x >= 64){
-            this.x -= 2;
+            this.x -= 4;
         }
         if (keyRIGHT.isDown && this.x <= 560){
-            this.x += 2;
+            this.x += 4;
         }
         if (keyDOWN.isDown && this.y <= 465){
-            this.y += 2;
+            this.y += 4;
         }
         if (keyUP.isDown && this.y >= 5){
-            this.y -= 2;
+            this.y -= 4;
         }
         
     }

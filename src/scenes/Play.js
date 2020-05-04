@@ -314,7 +314,7 @@ class Play extends Phaser.Scene{
         let menuConfig = {
             fontFamily: "Courier",
             fontSize: "26px",
-            backgroundColor: "#F3B141",
+            backgroundColor: "#8B008B",
             color: "#123456",
             align: "right",
             padding: {

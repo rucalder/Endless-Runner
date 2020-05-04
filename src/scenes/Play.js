@@ -37,9 +37,12 @@ class Play extends Phaser.Scene{
         //River 
         this.river = this.add.tileSprite(0, 0, 640, 480, "river").setOrigin(0, 0)
 
+        //Boat
         this.p1Boat = new Boat(this, 320, 440).setOrigin(0, 0).setScale(1.1, 1.1)
-        //const boat = this.add.sprite(200, 100, "CHARON SPRITE", 0)
 
+        //DarkCircles
+        this.p1CircleLarge = new Darkness(this, 320, 440).setOrigin(0, 0)
+        this.p1CircleSmall = new Darkness(this, 320, 440).setOrigin(0,0)
 
         // Define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
@@ -59,6 +62,9 @@ class Play extends Phaser.Scene{
         //Phaser.Physics.Arcade.enable(this.p1Boat);
         this.p1Boat.enableBody = true;
         this.p1Boat.onCollide = true;
+
+        this.p1CircleLarge.enableBody = true;
+        this.p1CircleSmall.enableBody = true;
         
 
         // Soul Animation
@@ -178,19 +184,6 @@ class Play extends Phaser.Scene{
         this.level = 1;
         this.levelCheck = 0;  
 
-        // this.soulGroup = this.add.group()
-        // this.soulGroup.add(this.soul)
-
-         /*this.obstacleGroup = this.add.group()
-         this.obstacleGroup.add(this.skull)
-         this.obstacleGroup.add(this.bone)
-         this.obstacleGroup.add(this.ribcage)
-         this.obstacleGroup.add(this.spike)
-         this.obstacleGroup.add(this.spike2)*/
-
-         //this.physics.add.collider(this.p1Boat, this.obstacleGroup, this.boatDead(this.p1Boat));
-        
-
     }
 
     update(){
@@ -198,6 +191,8 @@ class Play extends Phaser.Scene{
         if(!this.gameOver){
             this.river.tilePositionY -= game.settings.obstacleSpeed;
             this.p1Boat.update()
+            this.p1CircleLarge.update()
+            this.p1CircleSmall.update()
             this.skull.update()
             this.bone.update()
             this.soul.update()
@@ -215,15 +210,6 @@ class Play extends Phaser.Scene{
         if(this.gameOver){
             this.displayText();
         }
-
-        /*if(this.obstacleGroup.children.entries.map( obst => this.checkCollision(this.p1Boat, obst)).find(element => element == true)){
-            //GAMEOVER!!!
-            element.reset()
-            this.boatDead(this.p1Boat);
-            this.gameOver = true;    
-        }*/
-
-        
 
         //check collisions
         if(this.checkCollision(this.p1Boat, this.bone)) {
@@ -266,24 +252,6 @@ class Play extends Phaser.Scene{
             this.soul.reset();
         }
         this.score.text = this.p1Score
-
-
-
-
-        /*if(game.physics.arcade.collide(this.p1Boat, this.obstacleGroup)){
-            this.gameOver = true
-        }
-        if(this.game.physics.arcade.collide(this.p1Boat, this.obstacleGroup)){
-            this.gameOver = true
-        }
-
-        /*this.world.collide(this.p1Boat, this.obstacleGroup, function(){
-            this.gameOver = true
-        })*/
-        /*if(Phaser.Math.FloorTo(this.clock1.getElapsedSeconds() / 1.1) != 0){
-            Phaser.Physics.Arcade.Collider(this.p1Boat, this.obstacleGroup, this.gameOver1())
-        }*/
-        
 
         // check key input for restart
         if(Phaser.Math.FloorTo(this.clock1.getElapsedSeconds()) % 5 == 0){

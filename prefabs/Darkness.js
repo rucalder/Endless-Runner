@@ -22,3 +22,5 @@ class Darkness extends Phaser.GameObjects.Sprite{
         }
         
     }
+
+}

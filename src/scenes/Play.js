@@ -46,7 +46,7 @@ class Play extends Phaser.Scene{
         this.river.play("river")*/
         //this.temp = this.add.rectangle(320, 5, 16, 25, 0xFFFFFF).setOrigin(0, 0);
 
-        this.p1Boat = new Boat(this, 320, 440, "charon").setOrigin(0, 0)
+        this.p1Boat = new Boat(this, 320, 440).setOrigin(0, 0)
         //const boat = this.add.sprite(200, 100, "CHARON SPRITE", 0)
 
 
@@ -77,7 +77,7 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("soul", {start: 0, end: 2, first: 0}),
             frameRate:8
         });
-        this.soul = new Soul(this, 560, 100, "soul")//.setScale(.8, .8)
+        this.soul = new Obstacle(this, 560, 100)
         this.soul.play("soul")
 
 
@@ -88,7 +88,7 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("bone", {start: 0, end: 1, first: 0}),
             frameRate:8
         });
-        this.bone = new Obstacle(this, 100, 100, "bone")//.setScale(.8, .8)
+        this.bone = new Obstacle(this, 100, 100)//.setScale(.8, .8)
         this.bone.play("bone")
 
 
@@ -99,7 +99,7 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("skull", {start: 0, end: 1, first: 0}),
             frameRate:8
         });
-        this.skull = new Obstacle(this, 100, 200, "skull")//.setScale(.8, .8)
+        this.skull = new Obstacle(this, 100, 200)//.setScale(.8, .8)
         this.skull.play("skull")
 
         //ribcage
@@ -109,7 +109,7 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("ribcage", {start: 0, end: 1, first: 0}),
             frameRate:8
         });
-        this.ribcage = new Obstacle(this, 0, 0, "ribcage").setScale(.8, .8)
+        this.ribcage = new Obstacle(this, 0, 0)//.setScale(.8, .8)
         this.ribcage.play("ribcage")
         this.ribcage.setActive(false).setVisible(false);
 
@@ -120,7 +120,7 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("spike", {start: 0, end: 1, first: 0}),
             frameRate:8
         });
-        this.spike = new Obstacle(this, 0, 0, "spike").setScale(.8, .8)
+        this.spike = new Obstacle(this, 0, 0)//.setScale(.8, .8)
         this.spike.play("spike")
         this.spike.setActive(false).setVisible(false);
 
@@ -131,7 +131,7 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("2spike", {start: 0, end: 1, first: 0}),
             frameRate:8
         });
-        this.spike2 = new Obstacle(this, 0, 0, "2spike").setScale(.8, .8)
+        this.spike2 = new Obstacle(this, 0, 0)//.setScale(.8, .8)
         this.spike2.play("2spike")
         this.spike2.setActive(false).setVisible(false);
 
@@ -152,7 +152,7 @@ class Play extends Phaser.Scene{
         this.add.text(70, 5, "Score: ", this.scoreConfig);
         this.score = this.add.text(100, 5, this.p1Score, this.scoreConfig);
         
-
+        
 
 
         this.clock1 = this.time.delayedCall(99999999999999999, () => {
@@ -185,9 +185,12 @@ class Play extends Phaser.Scene{
         // this.soulGroup = this.add.group()
         // this.soulGroup.add(this.soul)
 
-        // this.obstacleGroup = this.add.group()
-        // this.obstacleGroup.add(this.skull)
-        // this.obstacleGroup.add(this.bone)
+         this.obstacleGroup = this.add.group()
+         this.obstacleGroup.add(this.skull)
+         this.obstacleGroup.add(this.bone)
+         this.obstacleGroup.add(this.ribcage)
+         this.obstacleGroup.add(this.spike)
+         this.obstacleGroup.add(this.spike2)
 
         //Phaser.Physics.Arcade.Collider(this.p1Boat, this.obstacleGroup, this.gameOver1())
         
@@ -217,6 +220,13 @@ class Play extends Phaser.Scene{
         if(this.gameOver){
             this.displayText();
         }
+
+        /*if(this.obstacleGroup.children.entries.map( obst => this.checkCollision(this.p1Boat, obst)).find(element => element == true)){
+            //GAMEOVER!!!
+            element.reset()
+            this.boatDead(this.p1Boat);
+            this.gameOver = true;    
+        }*/
 
 
         //check collisions

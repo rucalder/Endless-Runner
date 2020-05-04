@@ -3,11 +3,18 @@ let config = {
     width: 640,
     height: 480,
     scene: [Menu, Play],
+<<<<<<< HEAD
     physics: {
         default: 'arcade',
         arcade: {
             debug: true,
             //gravity: { y: 200 }
+=======
+    physics:{
+        default: "arcade",
+        arcade: {
+            //debug: true,
+>>>>>>> b3f592c3c757cf02be2b4def648db00c28919350
         }
     }
 }
@@ -23,6 +30,7 @@ function create(){
     game.physics.enable(ribcage, Phaser.Physics.ARCADE);
     game.physics.enable(spike, Phaser.Physics.ARCADE);
     game.physics.enable(spike2, Phaser.Physics.ARCADE);
+    
 }
 
 game.settings = {
@@ -30,4 +38,4 @@ game.settings = {
     gameTimer1: 60000,  
 }
 
-let keyF, keyLEFT, keyRIGHT, keyUP, keyDOWN;
+let keyA, keyLEFT, keyRIGHT, keyUP, keyDOWN;

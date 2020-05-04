@@ -111,9 +111,9 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("ribcage", {start: 0, end: 1, first: 0}),
             frameRate:8
         });
-        this.ribcage = new Obstacle(this, 200, 200)//.setScale(.8, .8)
+        this.ribcage = new Obstacle(this, 0, 0)//.setScale(.8, .8)
         this.ribcage.play("ribcage")
-        //this.ribcage.setActive(false).setVisible(false);
+        this.ribcage.setActive(false).setVisible(false);
         this.ribcage.setSize(16, 16, true);
 
         //spike
@@ -123,9 +123,9 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("spike", {start: 0, end: 1, first: 0}),
             frameRate:8
         });
-        this.spike = new Obstacle(this, 300, 200)//.setScale(.8, .8)
+        this.spike = new Obstacle(this, 0, 0)//.setScale(.8, .8)
         this.spike.play("spike")
-        //this.spike.setActive(false).setVisible(false);
+        this.spike.setActive(false).setVisible(false);
         this.spike.setSize(16, 16, true);
 
         //spike2
@@ -135,9 +135,9 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("2spike", {start: 0, end: 1, first: 0}),
             frameRate:8
         });
-        this.spike2 = new Obstacle(this, 300, 300)//.setScale(.8, .8)
+        this.spike2 = new Obstacle(this, 0, 0)//.setScale(.8, .8)
         this.spike2.play("2spike")
-        //this.spike2.setActive(false).setVisible(false);
+        this.spike2.setActive(false).setVisible(false);
         this.spike2.setSize(16, 16, true);
 
         //Score display
@@ -190,12 +190,12 @@ class Play extends Phaser.Scene{
         // this.soulGroup = this.add.group()
         // this.soulGroup.add(this.soul)
 
-         this.obstacleGroup = this.add.group()
+         /*this.obstacleGroup = this.add.group()
          this.obstacleGroup.add(this.skull)
          this.obstacleGroup.add(this.bone)
          this.obstacleGroup.add(this.ribcage)
          this.obstacleGroup.add(this.spike)
-         this.obstacleGroup.add(this.spike2)
+         this.obstacleGroup.add(this.spike2)*/
 
          //this.physics.add.collider(this.p1Boat, this.obstacleGroup, this.boatDead(this.p1Boat));
         
@@ -205,7 +205,7 @@ class Play extends Phaser.Scene{
     update(){
         if(!this.gameOver){
             this.p1Boat.update()
-            /*this.skull.update()
+            this.skull.update()
             this.bone.update()
             this.soul.update()
             if(this.clock2.getProgress() == 1){
@@ -216,7 +216,7 @@ class Play extends Phaser.Scene{
             }
             if(this.clock4.getProgress() == 1){
                 this.spike2.update()
-            }*/
+            }
             this.time1.text = this.clock1.getElapsedSeconds();
         }
         if(this.gameOver){

@@ -66,7 +66,7 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("soul", {start: 0, end: 2, first: 0}),
             frameRate:8
         });
-        this.soul = new Obstacle(this, 560, 100).setScale(1.3, 1.3)
+        this.soul = new Obstacle(this, 560, 100).setScale(1.5, 1.5)
         this.soul.play("soul")
 
 
@@ -77,7 +77,7 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("bone", {start: 0, end: 1, first: 0}),
             frameRate:8
         });
-        this.bone = new Obstacle(this, 100, 100)//.setScale(.8, .8)
+        this.bone = new Obstacle(this, 100, 100).setScale(1.5,1.5)
         this.bone.play("bone")
         this.bone.setSize(16, 16, true);
 
@@ -89,7 +89,7 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("skull", {start: 0, end: 1, first: 0}),
             frameRate:8
         });
-        this.skull = new Obstacle(this, 100, 200)//.setScale(.8, .8)
+        this.skull = new Obstacle(this, 100, 200).setScale(1.5, 1.5)
         this.skull.play("skull")
         this.skull.setSize(16, 16, true);
 
@@ -100,7 +100,7 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("ribcage", {start: 0, end: 1, first: 0}),
             frameRate:8
         });
-        this.ribcage = new Obstacle(this, 0, 0)//.setScale(.8, .8)
+        this.ribcage = new Obstacle(this, 0, 0).setScale(1.5, 1.5)
         this.ribcage.play("ribcage")
         this.ribcage.setActive(false).setVisible(false);
         this.ribcage.setSize(16, 16, true);
@@ -112,7 +112,7 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("spike", {start: 0, end: 1, first: 0}),
             frameRate:8
         });
-        this.spike = new Obstacle(this, 0, 0)//.setScale(.8, .8)
+        this.spike = new Obstacle(this, 0, 0).setScale(1.5, 1.5)
         this.spike.play("spike")
         this.spike.setActive(false).setVisible(false);
         this.spike.setSize(16, 16, true);
@@ -124,7 +124,7 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("2spike", {start: 0, end: 1, first: 0}),
             frameRate:8
         });
-        this.spike2 = new Obstacle(this, 0, 0)//.setScale(.8, .8)
+        this.spike2 = new Obstacle(this, 0, 0).setScale(1.5, 1.5)
         this.spike2.play("2spike")
         this.spike2.setActive(false).setVisible(false);
         this.spike2.setSize(16, 16, true);

@@ -162,7 +162,7 @@ class Play extends Phaser.Scene{
 
         //DarkCircles
         this.p1CircleLarge = new Darkness(this, 320, 440, "shadowLarge")
-        this.p1CircleSmall = new Darkness(this, 320, 440, "shadowSmall").setScale(2.4, 2.4)
+        this.p1CircleSmall = new Darkness(this, 320, 440, "shadowSmall").setScale(3.2, 3.2)
         this.p1CircleLarge.alpha = 1
 
         this.p1CircleLarge.enableBody = true;
@@ -170,8 +170,15 @@ class Play extends Phaser.Scene{
 
 
         this.timer = this.time.addEvent({delay: 100, callback: function(){
-            if(this.p1CircleLarge.alpha != 1){
-                this.p1CircleLarge.alpha += .01
+            if(this.clock2.getProgress() == 1){
+                if(this.p1CircleLarge.alpha != 1){
+                    this.p1CircleLarge.alpha += .01
+                }
+            }
+            else{
+                if(this.p1CircleLarge.alpha != 1){
+                    this.p1CircleLarge.alpha += .005
+                }
             }
         }, callbackScope:this, loop: true });
 
@@ -303,6 +310,19 @@ class Play extends Phaser.Scene{
                 return true;
         } else {
             return false;
+        }
+    }
+
+    makeDarker(circle){
+        if(this.clock2.getProgress() == 1){
+            if(circle.alpha != 1){
+                circle.alpha += .02
+            }
+        }
+        else{
+            if(circle.alpha != 1){
+                circle.alpha += .005
+            }
         }
     }
 

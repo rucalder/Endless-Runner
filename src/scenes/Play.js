@@ -256,7 +256,10 @@ class Play extends Phaser.Scene{
         }
         if(this.checkCollision(this.p1Boat, this.soul)) {
             console.log('collect soul');
-            this.soulSound.play();
+            this.soulSound.play({
+                volume: .3,
+                loop: true
+            })
             this.p1Score += 1;
             this.soul.reset();
         }
@@ -304,7 +307,7 @@ class Play extends Phaser.Scene{
     boatDead(boat){
         boat.alpha = 0;
         this.crash.play({
-            volume: .3,
+            volume: .08,
             loop: false
         })
     }

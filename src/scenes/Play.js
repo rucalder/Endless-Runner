@@ -35,7 +35,7 @@ class Play extends Phaser.Scene{
         //River 
         this.river = this.add.tileSprite(0, 0, 640, 480, "river").setOrigin(0, 0)
 
-        this.p1Boat = new Boat(this, 320, 440).setOrigin(0, 0).setScale(1.5, 1.5)
+        this.p1Boat = new Boat(this, 320, 440).setOrigin(0, 0).setScale(1.1, 1.1)
         //const boat = this.add.sprite(200, 100, "CHARON SPRITE", 0)
 
 

@@ -77,6 +77,7 @@ class Play extends Phaser.Scene{
         this.bone = new Obstacle(this, 100, 100).setScale(1.5,1.5)
         this.bone.play("bone")
         this.bone.setSize(16, 16, true);
+        this.bone.reset()
 
 
         //Skull
@@ -86,9 +87,10 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("skull", {start: 0, end: 1, first: 0}),
             frameRate:8
         });
-        this.skull = new Obstacle(this, 100, 200).setScale(1.5, 1.5)
+        this.skull = new Obstacle(this, 0, 0).setScale(1.5, 1.5)
         this.skull.play("skull")
         this.skull.setSize(16, 16, true);
+        this.skull.setActive(false).setVisible(false);
 
         //ribcage
         this.anims.create({
@@ -135,6 +137,11 @@ class Play extends Phaser.Scene{
             
         }, null, this);
 
+        this.clock5 = this.time.delayedCall(30000, () => {
+            this.skull.setActive(true).setVisible(true);
+            this.skull.reset()
+        }, null, this);
+
         this.clock2 = this.time.delayedCall(10000, () => {
             this.ribcage.setActive(true).setVisible(true);
             this.ribcage.reset()
@@ -144,7 +151,7 @@ class Play extends Phaser.Scene{
             this.spike.setActive(true).setVisible(true);
             this.spike.reset()
         }, null, this);
-        this.clock4 = this.time.delayedCall(30000, () => {
+        this.clock4 = this.time.delayedCall(40000, () => {
             this.spike2.setActive(true).setVisible(true);
             this.spike2.reset()
         }, null, this);
@@ -162,9 +169,9 @@ class Play extends Phaser.Scene{
         this.p1CircleSmall.enableBody = true;
 
 
-        this.timer = this.time.addEvent({delay: 3000, callback: function(){
+        this.timer = this.time.addEvent({delay: 100, callback: function(){
             if(this.p1CircleLarge.alpha != 1){
-                this.p1CircleLarge.alpha += .1
+                this.p1CircleLarge.alpha += .01
             }
         }, callbackScope:this, loop: true });
 
@@ -179,7 +186,7 @@ class Play extends Phaser.Scene{
             frames: this.anims.generateFrameNumbers("soul", {start: 0, end: 2, first: 0}),
             frameRate:8
         });
-        this.soul = new Obstacle(this, 560, 100).setScale(1.5, 1.5)
+        this.soul = new Obstacle(this, 320, 200).setScale(1.5, 1.5)
         this.soul.play("soul")
 
         //Score display
@@ -212,7 +219,7 @@ class Play extends Phaser.Scene{
             this.p1Boat.update()
             this.p1CircleLarge.update()
             this.p1CircleSmall.update()
-            this.skull.update()
+            
             this.bone.update()
             this.soul.update()
             if(this.clock2.getProgress() == 1){
@@ -224,6 +231,9 @@ class Play extends Phaser.Scene{
             if(this.clock4.getProgress() == 1){
                 this.spike2.update()
             }
+            if(this.clock5.getProgress() == 1){
+                this.skull.update()
+            }
             this.time1.text = this.clock1.getElapsedSeconds();
         }
         if(this.gameOver){
@@ -232,38 +242,38 @@ class Play extends Phaser.Scene{
 
         //check collisions
         if(this.checkCollision(this.p1Boat, this.bone)) {
-            console.log('dead bone');
+            //console.log('dead bone');
             this.boatDead(this.p1Boat);
             this.bone.reset();
             this.gameOver = true;
         }
         if(this.checkCollision(this.p1Boat, this.skull)) {
-            console.log('dead skull');
+            //console.log('dead skull');
             this.boatDead(this.p1Boat);
             this.skull.reset();
             this.gameOver = true;
         }
         if(this.checkCollision(this.p1Boat, this.ribcage)) {
-            console.log('dead rib');
+            //console.log('dead rib');
             this.boatDead(this.p1Boat);
             this.ribcage.reset();
             this.gameOver = true;
         }
         if(this.checkCollision(this.p1Boat, this.spike)) {
-            console.log('dead spike');
+            //console.log('dead spike');
             this.boatDead(this.p1Boat);
             this.spike.reset();
             this.gameOver = true;
         }
         if(this.checkCollision(this.p1Boat, this.spike2)) {
-            console.log('dead spike2');
+            //console.log('dead spike2');
             this.boatDead(this.p1Boat);
             this.spike2.reset();
             this.gameOver = true;
         }
         let circleSize = 5;
         if(this.checkCollision(this.p1Boat, this.soul)) {
-            console.log('collect soul');
+            //console.log('collect soul');
             this.soulSound.play({
                 volume: .3,
                 loop: false
@@ -272,7 +282,7 @@ class Play extends Phaser.Scene{
             this.p1CircleSmall.setScale(this.circleDarken(circleSize), this.circleDarken(circleSize))
             this.p1Score += 1;
             this.soul.reset();
-            this.p1CircleLarge.alpha -= .3
+            this.p1CircleLarge.alpha -= .25
         }
         this.score.text = this.p1Score
 

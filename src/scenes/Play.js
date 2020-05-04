@@ -38,22 +38,10 @@ class Play extends Phaser.Scene{
         this.river = this.add.tileSprite(0, 0, 640, 480, "river").setOrigin(0, 0)
 
         //Boat
-<<<<<<< HEAD
-        this.p1Boat = new Boat(this, 320, 440).setOrigin(0, 0).setScale(1.1, 1.1)
-        ///////////////////////////////////////////////////////////////////////////////////////////
-        //Shadows NEED TO EDIT THIS
-        this.shadowSmall = new Boat(this, 0, 0, "shadowSmall").setOrigin(0,0).setScale(0.5,0.5);
-        this.shadowLarge = new Boat(this, 0, 0, "shadowLarge").setOrigin(0,0).setScale(0.5,0.5);
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-=======
         this.p1Boat = new Boat(this, 310, 400).setOrigin(0, 0).setScale(1.1, 1.1)
 
-        //DarkCircles
-        this.p1CircleLarge = new Darkness(this, 320, 440, "shadowLarge")
-        this.p1CircleSmall = new Darkness(this, 320, 440, "shadowSmall")
-        this.p1CircleLarge.alpha = 0.7
+        
 
->>>>>>> 097a83cb5e1175bdb9d86e21481abeaac68d8313
         // Define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
@@ -72,17 +60,11 @@ class Play extends Phaser.Scene{
         //Phaser.Physics.Arcade.enable(this.p1Boat);
         this.p1Boat.enableBody = true;
         this.p1Boat.onCollide = true;
+
+        
         
 
-        // Soul Animation
-        this.anims.create({
-            key: "soul",
-            repeat: -1,
-            frames: this.anims.generateFrameNumbers("soul", {start: 0, end: 2, first: 0}),
-            frameRate:8
-        });
-        this.soul = new Obstacle(this, 560, 100).setScale(1.5, 1.5)
-        this.soul.play("soul")
+        
 
 
         //Bone Animation
@@ -191,6 +173,25 @@ class Play extends Phaser.Scene{
         this.level = 1;
         this.levelCheck = 0;  
 
+
+        //DarkCircles
+        this.p1CircleLarge = new Darkness(this, 320, 440, "shadowLarge")
+        this.p1CircleSmall = new Darkness(this, 320, 440, "shadowSmall").setScale(this.circleDarken(5), this.circleDarken(5))
+        this.p1CircleLarge.alpha = 0.7
+
+        this.p1CircleLarge.enableBody = true;
+        this.p1CircleSmall.enableBody = true;
+
+        // Soul Animation
+        this.anims.create({
+            key: "soul",
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers("soul", {start: 0, end: 2, first: 0}),
+            frameRate:8
+        });
+        this.soul = new Obstacle(this, 560, 100).setScale(1.5, 1.5)
+        this.soul.play("soul")
+
     }
 
     update(){
@@ -198,8 +199,8 @@ class Play extends Phaser.Scene{
         if(!this.gameOver){
             this.river.tilePositionY -= game.settings.obstacleSpeed;
             this.p1Boat.update()
-            this.shadowLarge.update()
-            this.shadowSmall.update()
+            this.p1CircleLarge.update()
+            this.p1CircleSmall.update()
             this.skull.update()
             this.bone.update()
             this.soul.update()
@@ -279,6 +280,10 @@ class Play extends Phaser.Scene{
         } else {
             return false;
         }
+    }
+
+    circleDarken(circleScale){
+        return circleScale -= .1;
     }
 
     boatDead(boat){

@@ -39,11 +39,11 @@ class Play extends Phaser.Scene{
 
         //Boat
         this.p1Boat = new Boat(this, 320, 440).setOrigin(0, 0).setScale(1.1, 1.1)
-
-        //DarkCircles
-        this.p1CircleLarge = new Darkness(this, 320, 440).setOrigin(0, 0)
-        this.p1CircleSmall = new Darkness(this, 320, 440).setOrigin(0,0)
-
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        //Shadows NEED TO EDIT THIS
+        this.shadowSmall = new Boat(this, 0, 0, "shadowSmall").setOrigin(0,0).setScale(0.5,0.5);
+        this.shadowLarge = new Boat(this, 0, 0, "shadowLarge").setOrigin(0,0).setScale(0.5,0.5);
+        ////////////////////////////////////////////////////////////////////////////////////////////////
         // Define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
@@ -62,9 +62,6 @@ class Play extends Phaser.Scene{
         //Phaser.Physics.Arcade.enable(this.p1Boat);
         this.p1Boat.enableBody = true;
         this.p1Boat.onCollide = true;
-
-        this.p1CircleLarge.enableBody = true;
-        this.p1CircleSmall.enableBody = true;
         
 
         // Soul Animation
@@ -191,8 +188,8 @@ class Play extends Phaser.Scene{
         if(!this.gameOver){
             this.river.tilePositionY -= game.settings.obstacleSpeed;
             this.p1Boat.update()
-            this.p1CircleLarge.update()
-            this.p1CircleSmall.update()
+            this.shadowLarge.update()
+            this.shadowSmall.update()
             this.skull.update()
             this.bone.update()
             this.soul.update()

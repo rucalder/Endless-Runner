@@ -126,22 +126,7 @@ class Play extends Phaser.Scene{
         this.spike2.setActive(false).setVisible(false);
         this.spike2.setSize(16, 16, true);
 
-        //Score display
-        this.scoreConfig = {
-            fontFamily: "Courier",
-            fontSize: "28px",
-            //backgroundColor: "#F3B141",
-            color: "#FFFFFF",
-            align: "right",
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 100
-        }
-        this.p1Score = 0;
-        this.add.text(70, 5, "Score: ", this.scoreConfig);
-        this.score = this.add.text(100, 5, this.p1Score, this.scoreConfig);
+        
         
         
 
@@ -164,23 +149,28 @@ class Play extends Phaser.Scene{
             this.spike2.reset()
         }, null, this);
 
-        
-
-        this.totalTime = 0;
-        this.add.text(360, 5, "Time: ", this.scoreConfig);
-        this.time1 = this.add.text(450, 5, this.totalTime, this.scoreConfig);
-
         this.level = 1;
         this.levelCheck = 0;  
 
 
         //DarkCircles
         this.p1CircleLarge = new Darkness(this, 320, 440, "shadowLarge")
-        this.p1CircleSmall = new Darkness(this, 320, 440, "shadowSmall")
-        this.p1CircleLarge.alpha = 0.7
+        this.p1CircleSmall = new Darkness(this, 320, 440, "shadowSmall").setScale(2.4, 2.4)
+        this.p1CircleLarge.alpha = 1
 
         this.p1CircleLarge.enableBody = true;
         this.p1CircleSmall.enableBody = true;
+
+
+        this.timer = this.time.addEvent({delay: 3000, callback: function(){
+            if(this.p1CircleLarge.alpha != 1){
+                this.p1CircleLarge.alpha += .1
+            }
+        }, callbackScope:this, loop: true });
+
+
+
+
 
         // Soul Animation
         this.anims.create({
@@ -191,6 +181,27 @@ class Play extends Phaser.Scene{
         });
         this.soul = new Obstacle(this, 560, 100).setScale(1.5, 1.5)
         this.soul.play("soul")
+
+        //Score display
+        this.scoreConfig = {
+            fontFamily: "Courier",
+            fontSize: "28px",
+            //backgroundColor: "#F3B141",
+            color: "#FFFFFF",
+            align: "right",
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 100
+        }
+        this.p1Score = 0;
+        this.add.text(70, 5, "Score: ", this.scoreConfig);
+        this.score = this.add.text(100, 5, this.p1Score, this.scoreConfig);
+
+        this.totalTime = 0;
+        this.add.text(360, 5, "Time: ", this.scoreConfig);
+        this.time1 = this.add.text(450, 5, this.totalTime, this.scoreConfig);
 
     }
 
@@ -258,6 +269,7 @@ class Play extends Phaser.Scene{
             })
             this.p1Score += 1;
             this.soul.reset();
+            this.p1CircleLarge.alpha -= .3
         }
         this.score.text = this.p1Score
 

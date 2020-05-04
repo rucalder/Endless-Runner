@@ -279,7 +279,6 @@ class Play extends Phaser.Scene{
                 loop: false
             })
             //shrink circle
-            this.p1CircleSmall.setScale(this.circleDarken(circleSize), this.circleDarken(circleSize))
             this.p1Score += 1;
             this.soul.reset();
             this.p1CircleLarge.alpha -= .25
@@ -305,11 +304,6 @@ class Play extends Phaser.Scene{
         } else {
             return false;
         }
-    }
-
-    circleDarken(circleScale){
-        circleScale = circleScale - 1;
-        return circleScale;
     }
 
     boatDead(boat){

@@ -175,8 +175,9 @@ class Play extends Phaser.Scene{
 
 
         //DarkCircles
+        let circleSize = 5;
         this.p1CircleLarge = new Darkness(this, 320, 440, "shadowLarge")
-        this.p1CircleSmall = new Darkness(this, 320, 440, "shadowSmall").setScale(this.circleDarken(5), this.circleDarken(5))
+        this.p1CircleSmall = new Darkness(this, 320, 440, "shadowSmall").setScale(circleSize, circleSize)
         this.p1CircleLarge.alpha = 0.7
 
         this.p1CircleLarge.enableBody = true;
@@ -250,12 +251,15 @@ class Play extends Phaser.Scene{
             this.spike2.reset();
             this.gameOver = true;
         }
+        let circleSize = 5;
         if(this.checkCollision(this.p1Boat, this.soul)) {
             console.log('collect soul');
             this.soulSound.play({
                 volume: .3,
                 loop: false
             })
+            //shrink circle
+            this.p1CircleSmall.setScale(this.circleDarken(circleSize), this.circleDarken(circleSize))
             this.p1Score += 1;
             this.soul.reset();
         }
@@ -283,7 +287,8 @@ class Play extends Phaser.Scene{
     }
 
     circleDarken(circleScale){
-        return circleScale -= .1;
+        circleScale = circleScale - 1;
+        return circleScale;
     }
 
     boatDead(boat){

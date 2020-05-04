@@ -38,11 +38,12 @@ class Play extends Phaser.Scene{
         this.river = this.add.tileSprite(0, 0, 640, 480, "river").setOrigin(0, 0)
 
         //Boat
-        this.p1Boat = new Boat(this, 320, 440).setOrigin(0, 0).setScale(1.1, 1.1)
+        this.p1Boat = new Boat(this, 310, 400).setOrigin(0, 0).setScale(1.1, 1.1)
 
         //DarkCircles
-        this.p1CircleLarge = new Darkness(this, 320, 440).setOrigin(0, 0)
-        this.p1CircleSmall = new Darkness(this, 320, 440).setOrigin(0,0)
+        this.p1CircleLarge = new Darkness(this, 320, 440, "shadowLarge")
+        this.p1CircleSmall = new Darkness(this, 320, 440, "shadowSmall")
+        this.p1CircleLarge.alpha = 0.7
 
         // Define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);

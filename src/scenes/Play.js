@@ -313,19 +313,6 @@ class Play extends Phaser.Scene{
         }
     }
 
-    makeDarker(circle){
-        if(this.clock2.getProgress() == 1){
-            if(circle.alpha != 1){
-                circle.alpha += .02
-            }
-        }
-        else{
-            if(circle.alpha != 1){
-                circle.alpha += .005
-            }
-        }
-    }
-
     boatDead(boat){
         boat.alpha = 0;
         this.crash.play({

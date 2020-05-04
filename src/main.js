@@ -1,3 +1,16 @@
+// HEADER
+// Name:    Ruben Calderon 
+//          Ryan Chapkis 
+//          Derek Shue
+//
+// Title:   Chiron
+// Date:    May 3, 2020
+// Tilt:    Created dynamic lighting that the player directly affects (see large/small circles in Play.js)
+//          All art, music, and sfx are original
+
+
+
+
 let config = {
     type: Phaser.CANVAS,
     width: 640,

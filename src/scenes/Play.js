@@ -6,7 +6,7 @@ class Play extends Phaser.Scene{
     preload(){
         this.load.spritesheet("bone", "./assets/bone.png", {frameWidth: 32, frameHeight: 32})
         this.load.spritesheet("skull", "./assets/skull.png", {frameWidth: 32, frameHeight: 32})
-        this.load.spritesheet("soul", "./assets/soul sprite.png", {frameWidth: 32, frameHeight: 32})
+        this.load.spritesheet("soul", "./assets/Soul Sprite.png", {frameWidth: 32, frameHeight: 32})
         this.load.spritesheet("spike", "./assets/spike.png", {frameWidth: 32, frameHeight: 32})
         this.load.spritesheet("2spike", "./assets/2spike.png", {frameWidth: 32, frameHeight: 32})
         this.load.spritesheet("ribcage", "./assets/ribcage.png", {frameWidth: 32, frameHeight: 32})

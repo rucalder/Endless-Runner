@@ -242,54 +242,55 @@ class Play extends Phaser.Scene{
                 this.skull.update()
             }
             this.time1.text = this.clock1.getElapsedSeconds();
+            //check collisions
+            if(this.checkCollision(this.p1Boat, this.bone)) {
+                //console.log('dead bone');
+                this.boatDead(this.p1Boat);
+                //this.bone.reset();
+                this.gameOver = true;
+            }
+            if(this.checkCollision(this.p1Boat, this.skull)) {
+                //console.log('dead skull');
+                this.boatDead(this.p1Boat);
+                //this.skull.reset();
+                this.gameOver = true;
+            }
+            if(this.checkCollision(this.p1Boat, this.ribcage)) {
+                //console.log('dead rib');
+                this.boatDead(this.p1Boat);
+                //this.ribcage.reset();
+                this.gameOver = true;
+            }
+            if(this.checkCollision(this.p1Boat, this.spike)) {
+                //console.log('dead spike');
+                this.boatDead(this.p1Boat);
+                //this.spike.reset();
+                this.gameOver = true;
+            }
+            if(this.checkCollision(this.p1Boat, this.spike2)) {
+                //console.log('dead spike2');
+                this.boatDead(this.p1Boat);
+                //this.spike2.reset();
+                this.gameOver = true;
+            }
+            let circleSize = 5;
+            if(this.checkCollision(this.p1Boat, this.soul)) {
+                //console.log('collect soul');
+                this.soulSound.play({
+                    volume: .3,
+                    loop: false
+                })
+                //shrink circle
+                this.p1Score += 1;
+                this.soul.reset();
+                this.p1CircleLarge.alpha -= .25
+            }
         }
         if(this.gameOver){
             this.displayText();
         }
 
-        //check collisions
-        if(this.checkCollision(this.p1Boat, this.bone)) {
-            //console.log('dead bone');
-            this.boatDead(this.p1Boat);
-            this.bone.reset();
-            this.gameOver = true;
-        }
-        if(this.checkCollision(this.p1Boat, this.skull)) {
-            //console.log('dead skull');
-            this.boatDead(this.p1Boat);
-            this.skull.reset();
-            this.gameOver = true;
-        }
-        if(this.checkCollision(this.p1Boat, this.ribcage)) {
-            //console.log('dead rib');
-            this.boatDead(this.p1Boat);
-            this.ribcage.reset();
-            this.gameOver = true;
-        }
-        if(this.checkCollision(this.p1Boat, this.spike)) {
-            //console.log('dead spike');
-            this.boatDead(this.p1Boat);
-            this.spike.reset();
-            this.gameOver = true;
-        }
-        if(this.checkCollision(this.p1Boat, this.spike2)) {
-            //console.log('dead spike2');
-            this.boatDead(this.p1Boat);
-            this.spike2.reset();
-            this.gameOver = true;
-        }
-        let circleSize = 5;
-        if(this.checkCollision(this.p1Boat, this.soul)) {
-            //console.log('collect soul');
-            this.soulSound.play({
-                volume: .3,
-                loop: false
-            })
-            //shrink circle
-            this.p1Score += 1;
-            this.soul.reset();
-            this.p1CircleLarge.alpha -= .25
-        }
+        
         this.score.text = this.p1Score
 
         // check key input for restart
@@ -314,7 +315,7 @@ class Play extends Phaser.Scene{
     }
 
     boatDead(boat){
-        boat.alpha = 0;
+        boat.alpha = 1;
         this.crash.play({
             volume: .08,
             loop: false
@@ -327,6 +328,8 @@ class Play extends Phaser.Scene{
 
     displayText(){
         this.bgmusic.stop()
+
+        this.p1CircleLarge.alpha = 0
 
         let menuConfig = {
             fontFamily: "Courier",
